@@ -1,0 +1,42 @@
+<html>
+
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+
+<body>
+
+<div class = 'pane'>
+
+<h1>Wine App</h1>
+
+    <div class = "left-pane">
+
+	    <h2>Categories</h2>
+
+		{% for wine in wineList %}
+
+		<a href = "{{url_for('showMenu', wine_id = wine.id)}}"> <p>{{wine.name}}</p></a>
+
+		{% endfor %}
+
+    </div>
+
+    <div class = "right-pane">
+
+	    <h2>{{wine.name}}&nbsp;({{wineCount}})</h2>
+
+		{% for item in items %}
+
+		<a href = "{{url_for('showItem', wine_id=wine.id, menu_id = item.id)}}"><p>{{item.name}}</p></a>
+
+		{% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

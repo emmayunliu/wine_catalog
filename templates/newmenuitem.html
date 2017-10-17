@@ -1,0 +1,35 @@
+<html>
+
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+<body>
+
+<h1>New Menu Item</h1>
+
+<form action="#" method = 'post'>
+
+
+	<p>Name:</p>
+		<input type ='text' size='30' name='name'>
+	<p>Description:</p>
+		<input type ='text' size='30' name='description'>
+	<p>Location:</p>
+		<input type ='text' size='30' name='location'>
+	<p>Taste:</p>
+		<input type ='text' size='30' name='taste'>
+	<p>Wine Type:</p>
+	<select name="wine_type">
+		<option value="1">White Wine</option>
+		<option value="2" selected>Red Wine</option>
+		<option value="3">Rose Wine</option>
+	</select>
+	</br>
+
+
+<input type='submit' value='Create'>
+
+</form>
+
+</body>
+</html>

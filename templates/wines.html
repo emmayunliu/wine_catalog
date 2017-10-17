@@ -1,0 +1,59 @@
+<html>
+
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+
+<body>
+
+<div class="row top-menu">
+	<div class="col-md-6 text-right">
+		    {%if 'username' not in login %}
+			<a href="{{url_for('showLogin')}}">Click Here to Login </a>
+			{% else %}
+			<a href="{{url_for('gdisconnect')}}">Logout </a>
+			{% endif %}
+
+	</div>
+</div>
+
+<div class = 'pane'>
+
+<h1>Wine App</h1>
+
+    <div class = "left-pane">
+
+	    <h2>Categories</h2>
+
+		{% for wine in wines %}
+
+		<a href = "{{url_for('showMenu', wine_id = wine.id)}}"> <p>{{wine.name}}</p></a>
+
+	    {% endfor %}
+
+    </div>
+
+    <div class = "right-pane">
+
+		{%if 'username' in login %}
+
+		<a href="{{url_for('newMenuItem')}}"><h2>Add a new item</h2></a>
+		{% endif %}
+
+
+	    <h2>Latest Items</h2>
+
+		{% for wine in latestAddedItem %}
+
+		<a><p>{{wine.name}}&nbsp;({{wine.wine_name}})</p></a>
+
+		{% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

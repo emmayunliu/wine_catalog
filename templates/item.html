@@ -1,0 +1,32 @@
+<html>
+
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+
+<body>
+
+<div class = 'pane'>
+
+<h1>Wine App</h1>
+
+	    <h2>{{items.name}}</h2>
+
+		<a><p>{{items.description}}</p></a>
+
+            {%if login['user_id'] == items.user_id %}
+        <a href = "{{url_for('editMenuItem',wine_id = items.wine_id, menu_id = items.id)}}"><p>Edit</p></a>
+
+        <a href = "{{url_for('deleteMenuItem',wine_id = items.wine_id, menu_id = items.id)}}"><p>Delete</p></a>
+			{% endif %}
+
+
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
