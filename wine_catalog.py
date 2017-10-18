@@ -293,20 +293,22 @@ def showMenu(wine_id):
         wine_id=wine_id).all()
     wineCount = session.query(MenuItem).filter_by(wine_id=wine_id).count()
     return render_template('menu.html', items=items, wine=wine,
-                           wineList=wineList, wineCount=wineCount)
+                           wineList=wineList, wineCount=wineCount,
+                           login=login_session)
 
 
 @app.route('/wine/<int:wine_id>/<int:menu_id>/')
 def showItem(wine_id, menu_id):
     items = session.query(MenuItem).filter_by(
         id=menu_id).one()
-    login = login_session
-    return render_template('item.html', items=items, login=login)
+    return render_template('item.html', items=items, login=login_session)
 
 
 # Create a new menu item
 @app.route('/wine/new/', methods=['GET', 'POST'])
 def newMenuItem():
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         newItem = MenuItem(name=request.form['name'],
                            description=request.form['description'],
@@ -317,7 +319,8 @@ def newMenuItem():
         session.add(newItem)
         session.commit()
 
-        return redirect(url_for('showMenu', wine_id=newItem.wine_id))
+        return redirect(url_for('showMenu', wine_id=newItem.wine_id,
+                                login=login_session))
     else:
         return render_template('newmenuitem.html')
 
@@ -327,6 +330,8 @@ def newMenuItem():
 @app.route('/wine/<int:wine_id>/<int:menu_id>/edit',
            methods=['GET', 'POST'])
 def editMenuItem(wine_id, menu_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     editedItem = session.query(MenuItem).filter_by(id=menu_id).one()
     if request.method == 'POST':
         if request.form['name']:
@@ -339,12 +344,12 @@ def editMenuItem(wine_id, menu_id):
             editedItem.course = request.form['taste']
         session.add(editedItem)
         session.commit()
-        return redirect(url_for('showMenu', wine_id=wine_id))
+        return redirect(url_for('showMenu', wine_id=wine_id, login=login_session))
     else:
 
         return render_template(
             'editmenuitem.html', wine_id=wine_id, menu_id=menu_id,
-            item=editedItem)
+            item=editedItem, login=login_session)
 
 
 # Delete a menu item
@@ -353,13 +358,16 @@ def editMenuItem(wine_id, menu_id):
 @app.route('/wine/<int:wine_id>/menu/<int:menu_id>/delete',
            methods=['GET', 'POST'])
 def deleteMenuItem(wine_id, menu_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     itemToDelete = session.query(MenuItem).filter_by(id=menu_id).one()
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
         return redirect(url_for('showMenu', wine_id=wine_id))
     else:
-        return render_template('deleteMenuItem.html', item=itemToDelete)
+        return render_template('deleteMenuItem.html', item=itemToDelete,
+                               login=login_session)
 
 
 if __name__ == '__main__':

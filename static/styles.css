@@ -1,4 +1,4 @@
-body            { font-family: sans-serif; background-color: #E6E6FA;}
+body            { font-family: sans-serif; background-color: ##696969;}
  h1, h2, h3, h4       { color: #CCCCCC; }
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
 h1              { border-bottom: 2px solid #eee; }
@@ -25,7 +25,7 @@ a {text-decoration: none; color:#FFFFCC; font-size: .75em;}
 	font-weight: 400;
 }
 
-.pane { padding: 5px; margin: 5px; border-color: #999999; background-color: #333333; }
+.pane { padding: 5px; margin: 5px; border-color: #999999; background-color: ##696969; }
 
 .left-pane {width:20%; text-align: left; float: left; border-top: 20px;}
 
