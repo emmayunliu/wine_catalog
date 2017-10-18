@@ -344,7 +344,8 @@ def editMenuItem(wine_id, menu_id):
             editedItem.course = request.form['taste']
         session.add(editedItem)
         session.commit()
-        return redirect(url_for('showMenu', wine_id=wine_id, login=login_session))
+        return redirect(url_for('showMenu', wine_id=wine_id,
+                                login=login_session))
     else:
 
         return render_template(
